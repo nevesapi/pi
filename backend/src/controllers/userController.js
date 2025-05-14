@@ -1,16 +1,16 @@
 import { pool } from "../config/db.js";
 
 export const registerUser = async (req, res) => {
-  const { nome, email, password } = req.body;
+  const { name, email, password } = req.body;
 
-  if (!nome || !email || !password) {
+  if (!name || !email || !password) {
     res.status(400).json({ message: "Preencha todos os campos" });
   }
 
   try {
     const [rows] = await pool.execute(
-      "INSERT INTO users (nome, email, senha) VALUES (?, ?, ?)",
-      [nome, email, password]
+      "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+      [name, email, password]
     );
 
     res.status(201).json({ message: "Usuário cadastrado com sucesso" });
@@ -25,7 +25,7 @@ export const loginUser = async (req, res) => {
 
   try {
     const [rows] = await pool.execute(
-      "SELECT * FROM users WHERE email = ? AND senha = ?",
+      "SELECT * FROM users WHERE email = ? AND password = ?",
       [email, password]
     );
 

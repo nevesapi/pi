@@ -375,10 +375,14 @@ header a {
   border-radius: 0.5rem;
 }
 
+.card-produto h3,
+.card-produto span {
+  text-align: center;
+  color: #ffffff;
+}
+
 .card-produto h3 {
   font-size: 1.5rem;
-  color: #ffffff;
-  text-align: center;
 }
 
 .card-produto button {

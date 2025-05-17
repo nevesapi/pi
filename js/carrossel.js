@@ -34,14 +34,14 @@ async function loadContent() {
             height="356px"
           />
           <h3>${product.name}</h3>
-          <p>${product.description}</p>
+          <span>${product.description}</span>
           
           <div class="button-container">
             <button class="remove" aria-label="Botão de remover">
               <i class="fi fi-rr-minus"></i>
             </button>
 
-            <p>Comprar</p>
+            <p class="price">R$${product.price}</p>
 
             <button class="add" aria-label="Botão de adicionar">
               <i class="fi fi-rr-add"></i>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18/05/2025 às 16:43
+-- Tempo de geração: 19/05/2025 às 00:47
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -34,18 +34,19 @@ CREATE TABLE `products` (
   `name` varchar(100) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `description` text DEFAULT NULL,
-  `image_url` varchar(255) DEFAULT NULL
+  `image_url` varchar(255) DEFAULT NULL,
+  `category` enum('bebida','doce','salgado') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `description`, `image_url`) VALUES
-(2, 'Café de Quina', 9.90, 'Delicioso café de quina. Feito pra Quina', 'cafe_de_quina.jpg'),
-(3, 'Café Duplo', 8.50, 'Café duplo em dois copos', 'cafe_duplo.jpg'),
-(4, 'Expresso', 10.00, 'Café rápido sem pensar muito', 'cafe_expresso.jpg'),
-(5, 'Café Matinal', 9.50, 'Café para tomar de manhã', 'cafe_matinal.jpg');
+INSERT INTO `products` (`id`, `name`, `price`, `description`, `image_url`, `category`) VALUES
+(1, 'Café de Quina', 9.90, 'Delicioso café de quina. Feito pra Quina', 'cafe_de_quina.jpg', 'bebida'),
+(2, 'Café Duplo', 8.50, 'Café duplo em dois copos', 'cafe_duplo.jpg', 'bebida'),
+(3, 'Expresso', 10.00, 'Café rápido sem pensar muito', 'cafe_expresso.jpg', 'bebida'),
+(4, 'Café Matinal', 9.50, 'Café para tomar de manhã', 'cafe_matinal.jpg', 'bebida');
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
 (1, 'teste', 'teste@teste.com', '1234567574'),
 (2, 'Iris', 'boboca@gmail.com', '123456789'),
 (3, 'Ana', 'ana@ana.com', '12345678'),
-(4, 'Geladeira', 'dexogin266@movfull.com', '12345');
+(4, 'Geladeira', 'dexogin266@movfull.com', '12345'),
+(5, 'Denis', 'nevesdenis35@gmail.com', 'passwordValue');
 
 --
 -- Índices para tabelas despejadas
@@ -95,13 +97,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

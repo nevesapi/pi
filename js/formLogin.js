@@ -32,7 +32,7 @@ formLogin.addEventListener("submit", async (event) => {
     }
   } catch (error) {
     console.log(error);
-    statusForm.textContent = "Ops, algo deu errado. Tente novamente";
+    statusForm.textContent = "Ops, falha ao fazer login. Tente novamente";
     statusForm.style.color = "red";
   }
 });

@@ -18,8 +18,8 @@
     />
     <link
       rel="shortcut icon"
-      href="assets/icons/coffee_3.png"
-      type="image/png"
+      href="assets/icons/logo_cooffee.svg"
+      type="image/svg"
     />
     <link rel="stylesheet" href="global.css" />
   </head>
@@ -32,7 +32,7 @@
           <h1 class="titulo">
             <a href="index.html" aria-label="Página inicial Cooffee"
               ><span>Cooffee</span
-              ><img src="assets/icons/coffee_3.png" alt="Logotipo Cooffee"
+              ><img src="assets/icons/logo_cooffee.svg" alt="Logotipo Cooffee"
             /></a>
           </h1>
           <nav role="navigation" aria-label="Menu principal">
@@ -83,6 +83,77 @@
           <section class="conteudo">
             <h2>Bem vindo(a)!</h2>
             <p>Nós somos a nova cafeteria sem glúten</p>
+          </section>
+        </div>
+      </div>
+
+      <!-- Carrossel de compras -->
+      <div class="container-carossel-de-compras" id="carrosel">
+        <div class="limitador">
+          <section class="carrosel-de-compras">
+            <h2>Mais pedidos</h2>
+            <div class="container-card-slider">
+              <button
+                type="button"
+                class="slider-btn prev"
+                aria-label="Voltar no carrossel"
+              >
+                <i class="fi fi-rr-angle-left"></i>
+              </button>
+              <button
+                type="button"
+                class="slider-btn next"
+                aria-label="Avançar no carrosel"
+              >
+                <i class="fi fi-rr-angle-right"></i>
+              </button>
+
+              <div class="container-card"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Cards do Cardápio  -->
+      <div class="cardapio-container">
+        <div class="limitador">
+          <section class="cardapio">
+            <div class="conteudo-cardapio">
+              <h2>Cardápio</h2>
+              <p>
+                Selecione um item do cardápio e descubra a variedade de
+                alimentos e bebidas livre de glúten!
+              </p>
+            </div>
+
+            <div class="card-cardapio-container">
+              <a href="" class="card-link">
+                <h3>Bebidas</h3>
+                <img
+                  src="assets/icons/drink.png"
+                  alt="Icone de bebidas"
+                  loading="lazy"
+                />
+              </a>
+
+              <a href="" class="card-link">
+                <h3>Salgados</h3>
+                <img
+                  src="assets/icons/food.png"
+                  alt="Icone de salgados"
+                  loading="lazy"
+                />
+              </a>
+
+              <a href="" class="card-link">
+                <h3>Doces</h3>
+                <img
+                  src="assets/icons/confectionery.png"
+                  alt="Icone de doce"
+                  loading="lazy"
+                />
+              </a>
+            </div>
           </section>
         </div>
       </div>
@@ -139,77 +210,6 @@
                   <strong>São Paulo</strong>!
                 </p>
               </div>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      <!-- Carrossel de compras -->
-      <div class="container-carossel-de-compras" id="carrosel">
-        <div class="limitador">
-          <section class="carrosel-de-compras">
-            <h2>Mais pedidos</h2>
-            <div class="container-card-slider">
-              <button
-                type="button"
-                class="slider-btn prev"
-                aria-label="Voltar no carrossel"
-              >
-                <i class="fi fi-rr-angle-left"></i>
-              </button>
-              <button
-                type="button"
-                class="slider-btn next"
-                aria-label="Avançar no carrosel"
-              >
-                <i class="fi fi-rr-angle-right"></i>
-              </button>
-              
-              <div class="container-card"></div>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      <!-- Cards do Cardápio  -->
-      <div class="cardapio-container">
-        <div class="limitador">
-          <section class="cardapio">
-            <div class="conteudo-cardapio">
-              <h2>Cardápio</h2>
-              <p>
-                Selecione um item do cardápio e descubra a variedade de
-                alimentos e bebidas livre de glúten!
-              </p>
-            </div>
-
-            <div class="card-cardapio-container">
-              <a href="" class="card-link">
-                <h3>Bebidas</h3>
-                <img
-                  src="assets/icons/drink.png"
-                  alt="Icone de bebidas"
-                  loading="lazy"
-                />
-              </a>
-
-              <a href="" class="card-link">
-                <h3>Salgados</h3>
-                <img
-                  src="assets/icons/food.png"
-                  alt="Icone de salgados"
-                  loading="lazy"
-                />
-              </a>
-
-              <a href="" class="card-link">
-                <h3>Doces</h3>
-                <img
-                  src="assets/icons/confectionery.png"
-                  alt="Icone de doce"
-                  loading="lazy"
-                />
-              </a>
             </div>
           </section>
         </div>

@@ -240,7 +240,7 @@ header a {
 }
 
 .sobre h2 {
-  font-size: 2.25rem;
+  font-size: clamp(2.25rem, 6vw, 3rem);
   margin-bottom: 1rem;
 }
 
@@ -271,9 +271,10 @@ header a {
 }
 
 .carrosel-de-compras h2 {
-  font-size: 2.25rem;
+  font-size: clamp(2.25rem, 6vw, 3rem);
   text-align: center;
   margin-bottom: 1rem;
+  color: #465940;
 }
 
 .container-card-slider {
@@ -422,7 +423,7 @@ header a {
 }
 
 .cardapio h2 {
-  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-size: clamp(2.25rem, 6vw, 4rem);
   margin-bottom: 1rem;
 }
 

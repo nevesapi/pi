@@ -23,7 +23,7 @@ export function menuHamburguer() {
 
   window.addEventListener("resize", () => {
     const windowWidth = window.innerWidth;
-    console.log(windowWidth);
+    // console.log(windowWidth);
 
     if (windowWidth > 768) {
       menu.classList.remove("ativo");

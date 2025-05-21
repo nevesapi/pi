@@ -78,21 +78,13 @@
 
     <!-- Começo conteúdo principal (main) -->
     <main id="main-content">
-      <div class="hero">
-        <div class="conteudo-hero">
-          <section class="conteudo">
-            <h2>Bem vindo(a)!</h2>
-            <p>Nós somos a nova cafeteria sem glúten</p>
-          </section>
-        </div>
-      </div>
-
       <!-- Carrossel de compras -->
-      <div class="container-carossel-de-compras" id="carrosel">
-        <div class="limitador">
-          <section class="carrosel-de-compras">
-            <h2>Cardápio</h2>
-            <div class="container-card-slider">
+      <div class="limitador">
+        <article class="cardapio-page">
+          <h2>Cardápio</h2>
+          <div class="cardapio-page-container">
+            <section class="container-card-slider">
+              <h3></h3>
               <button
                 type="button"
                 class="slider-btn prev"
@@ -107,13 +99,48 @@
               >
                 <i class="fi fi-rr-angle-right"></i>
               </button>
-
               <div class="container-card" id="bebidas"></div>
+            </section>
+
+            <section class="container-card-slider">
+              <h3></h3>
+              <button
+                type="button"
+                class="slider-btn prev"
+                aria-label="Voltar no carrossel"
+              >
+                <i class="fi fi-rr-angle-left"></i>
+              </button>
+              <button
+                type="button"
+                class="slider-btn next"
+                aria-label="Avançar no carrosel"
+              >
+                <i class="fi fi-rr-angle-right"></i>
+              </button>
               <div class="container-card" id="doces"></div>
+            </section>
+
+            <section class="container-card-slider">
+              <h3></h3>
+              <button
+                type="button"
+                class="slider-btn prev"
+                aria-label="Voltar no carrossel"
+              >
+                <i class="fi fi-rr-angle-left"></i>
+              </button>
+              <button
+                type="button"
+                class="slider-btn next"
+                aria-label="Avançar no carrosel"
+              >
+                <i class="fi fi-rr-angle-right"></i>
+              </button>
               <div class="container-card" id="salgados"></div>
-            </div>
-          </section>
-        </div>
+            </section>
+          </div>
+        </article>
       </div>
     </main>
 

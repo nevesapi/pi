@@ -1,4 +1,4 @@
-const containerCard = document.querySelector(".container-card");
+const containerCard = document.querySelector("#mais-pedidos");
 const btnPrev = document.querySelector(".slider-btn.prev");
 const btnNext = document.querySelector(".slider-btn.next");
 
@@ -30,20 +30,18 @@ async function loadContent() {
           <img
             src="${product.image}"
             alt="${product.name}"
-            width="358px"
-            height="356px"
           />
           <h3>${product.name}</h3>
           <span>${product.description}</span>
           
           <div class="button-container">
-            <button class="remove" aria-label="Botão de remover">
+            <button class="remove" aria-label="Botão de remover o ${product.name} do carrinho">
               <i class="fi fi-rr-minus"></i>
             </button>
 
             <p class="price">R$${product.price}</p>
 
-            <button class="add" aria-label="Botão de adicionar">
+            <button class="add" aria-label="Botão de adicionar o ${product.name} do carrinho">
               <i class="fi fi-rr-add"></i>
             </button>
           </div>

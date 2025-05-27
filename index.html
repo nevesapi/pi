@@ -48,22 +48,18 @@
               <li>
                 <a href="/"><i class="fi fi-rr-home"></i>Home</a>
               </li>
+
               <li>
                 <a href="cardapio.html"
                   ><i class="fi fi-rr-flower-tulip"></i>Cardápio</a
                 >
               </li>
-              <li>
-                <a href="contato.html"
-                  ><i class="fi fi-rr-envelope-open"></i>Contato</a
-                >
-              </li>
-              
+
               <li>
                 <a href="login.html"><i class="fi fi-rr-user"></i>Login </a>
               </li>
             </ul>
-            <a href="" class="cart"><i class="fi fi-rr-shopping-cart"></i></a>
+            <a href="#" class="cart"><i class="fi fi-rr-shopping-cart"></i></a>
           </nav>
         </div>
       </div>
@@ -259,6 +255,19 @@
         </div>
       </div>
     </footer>
+
+    <div id="cart-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="header-modal">
+          <h2>Meu Carrinho</h2>
+          <button id="close-modal">
+            <span>Fechar</span><i class="fi fi-rr-circle-xmark"></i>
+          </button>
+        </div>
+        <div id="cart-items"></div>
+        <button id="checkout-btn">Finalizar Compra</button>
+      </div>
+    </div>
     <script type="module" src="js/main.js"></script>
     <script src="js/carrossel.js"></script>
   </body>

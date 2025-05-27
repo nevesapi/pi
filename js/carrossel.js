@@ -9,8 +9,8 @@ const CATEGORY_LABELS = {
 
 function createProductCard(product) {
   return `
-    <div class="card-produto">
-      <img src="${product.image}" alt="${product.name}" width="358px" height="356px" />
+    <div class="card-produto" data-id="${product.id}">
+      <img src="${product.image}" alt="${product.name}" />
       <h3>${product.name}</h3>
       <span>${product.description}</span>
       <div class="button-container">
@@ -33,8 +33,8 @@ function setupScrollButtons(container) {
   const btnPrev = containerSlider.querySelector(".slider-btn.prev");
   const btnNext = containerSlider.querySelector(".slider-btn.next");
 
-  console.log(btnNext);
-  console.log(btnPrev);
+  // console.log(btnNext);
+  // console.log(btnPrev);
 
   if (btnPrev) {
     btnPrev.addEventListener("click", () => {

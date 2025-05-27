@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cooffee | Login</title>
+    <title>Cooffee | Cadastro</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,69 +68,7 @@
 
     <!-- Começo conteúdo principal (main) -->
     <main id="main-content">
-      <div class="form-container">
-        <div class="limitador">
-          <div class="form-align">
-            <div class="form-content-container">
-              <div class="form-content">
-                <h2>Formulário Cooffee</h2>
-                <p>
-                  Você que encara o <strong>glúten</strong> como inimigo número
-                  um: <strong>seu lugar é aqui</strong>!
-                  <strong>Faça login</strong> agora e aproveite o melhor dos
-                  <strong>produtos sem glúten</strong>, feitos especialmente
-                  para quem vive <strong>sem glúten</strong>, mas com
-                  <strong>muito sabor</strong>.
-                </p>
-              </div>
 
-              <form id="form-login" action="" method="post">
-                <div class="form">
-                  <div class="email">
-                    <input
-                      required
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="exemplo@exemplo.com"
-                      aria-label="Digite seu email"
-                    />
-                  </div>
-
-                  <div class="password">
-                    <input
-                      required
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="Digite sua senha"
-                      aria-label="Digite sua senha"
-                    />
-                  </div>
-
-                  <button
-                    id="my-form-button"
-                    class="btn-submit"
-                    type="submit"
-                    aria-label="Botão de login"
-                  >
-                    Entrar <i class="fi fi-rr-paper-plane"></i>
-                  </button>
-                  <span id="my-form-status"></span>
-                </div>
-
-                <p>
-                  <a
-                    href="cadastro.html"
-                    aria-label="Ir para a página de cadastro"
-                    >Não possui uma conta? Cadastre-se</a
-                  >
-                </p>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
     </main>
 
     <footer>
@@ -182,7 +120,7 @@
                 <p>
                   <a
                     href="mailto:teste@teste.com"
-                    aria-label="Enviar mensagem por e-mail teste@teste.com"
+                    aria-label="Enviar mensagem para o e-mail teste@teste.com"
                     >teste@teste.com</a
                   >
                 </p>
@@ -206,6 +144,7 @@
       </div>
     </div>
     <script type="module" src="js/main.js"></script>
-    <script src="js/formLogin.js"></script>
+    <script src="js/formRegister.js"></script>
+    <script src="js/togglePassword.js"></script>
   </body>
 </html>

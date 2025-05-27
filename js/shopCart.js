@@ -1,38 +1,79 @@
 export function shopCart() {
-  const buttonContainer = document.querySelector(".container-card");
   const spanCount = document.createElement("span");
   const cart = document.querySelector(".cart i");
 
-  if (!buttonContainer || !spanCount || !cart) return;
+  if (!cart) return;
 
-  let count = 0;
+  let cartItems = JSON.parse(sessionStorage.getItem("cart")) || [];
 
-  buttonContainer.addEventListener("click", (event) => {
-    if (event.target.closest("button.add")) {
-      count++;
-      updateCardContent();
-    }
+  updateCartCounter();
 
-    if (event.target.closest("button.remove")) {
-      if (count > 0) {
-        count--;
-        updateCardContent();
+  document.addEventListener("click", (event) => {
+    const addBtn = event.target.closest("button.add");
+    const removeBtn = event.target.closest("button.remove");
+
+    if (!addBtn && !removeBtn) return;
+
+    const card = (addBtn || removeBtn).closest(".card-produto");
+    if (!card) return;
+
+    const product = {
+      id: card.dataset.id,
+      name: card.querySelector("h3").textContent,
+      description: card.querySelector("span").textContent,
+      price: parseFloat(
+        card
+          .querySelector(".price")
+          .textContent.replace("R$", "")
+          .replace(",", ".")
+      ),
+      image: card.querySelector("img").getAttribute("src"),
+      quantity: 1,
+    };
+
+    if (addBtn) {
+      const existing = cartItems.find((item) => item.id === product.id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cartItems.push(product);
       }
     }
-    //funciona fudido
-    console.log("Clicou em:", event.target);
+
+    if (removeBtn) {
+      const index = cartItems.findIndex((item) => item.id === product.id);
+      if (index !== -1) {
+        if (cartItems[index].quantity > 1) {
+          cartItems[index].quantity -= 1;
+        } else {
+          cartItems.splice(index, 1);
+        }
+      }
+    }
+
+    saveCart();
+    updateCartCounter();
   });
 
-  function updateCardContent() {
-    if (count <= 0) {
-      if (cart.contains(spanCount)) {
-        cart.removeChild(spanCount);
-      }
-    } else {
-      spanCount.textContent = count;
+  function updateCartCounter() {
+    const totalQuantity = cartItems.reduce(
+      (acc, item) => acc + item.quantity,
+      0
+    );
+
+    if (totalQuantity > 0) {
+      spanCount.textContent = totalQuantity;
       if (!cart.contains(spanCount)) {
         cart.appendChild(spanCount);
       }
+    } else {
+      if (cart.contains(spanCount)) {
+        cart.removeChild(spanCount);
+      }
     }
+  }
+
+  function saveCart() {
+    sessionStorage.setItem("cart", JSON.stringify(cartItems));
   }
 }

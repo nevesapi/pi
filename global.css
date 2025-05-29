@@ -692,6 +692,9 @@ footer {
   transform: scale(1.05);
 }
 
+#my-form-status {
+  text-align: center;
+}
 @media (min-width: 768px) {
   .header .btn-menu {
     display: none;

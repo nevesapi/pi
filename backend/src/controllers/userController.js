@@ -16,6 +16,8 @@ export const registerUser = async (req, res) => {
       [email]
     );
 
+    console.log("Encontrando user: " + existingUser);
+
     if (existingUser.length > 0) {
       return res.status(409).json({ message: "E-mail já cadastrado" });
     }
@@ -26,6 +28,8 @@ export const registerUser = async (req, res) => {
       "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
       [name, email, hashedPassword]
     );
+
+    console.log("Cadastrando Usuário: " + rows);
 
     res.status(201).json({ message: "Usuário cadastrado com sucesso" });
   } catch (error) {
@@ -38,12 +42,24 @@ export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    const [users] = await pool.execute("SELECT * FROM users WHERE email = ?", [
+      email,
+    ]);
+    if (users.length === 0) {
+      res.status(401).json({ message: "Ops, credenciais inválidas!" });
+    }
+
     const [rows] = await pool.execute(
       "SELECT * FROM users WHERE email = ? AND password = ?",
       [email, password]
     );
 
-    rows.length > 0
+    const user = users[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    console.log(rows);
+
+    isMatch
       ? res.json({ message: "Login bem-sucedido!" })
       : res.status(401).json({ message: "Ops, credenciais inválidas!" });
   } catch (error) {

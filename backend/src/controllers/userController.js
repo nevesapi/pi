@@ -22,12 +22,19 @@ export const registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
-    await pool.execute(
+    const [rows] = await pool.execute(
       "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
       [name, email, hashedPassword]
     );
 
-    res.status(201).json({ message: "Usuário cadastrado com sucesso" });
+    res.status(201).json({
+      message: "Usuário cadastrado com sucesso",
+      user: {
+        id: rows.insertId,
+        name,
+        email,
+      },
+    });
   } catch (error) {
     console.error("Erro ao cadastrar usuário: ", error);
     res.status(500).json({ error: "Erro interno no servidor" });
@@ -53,7 +60,14 @@ export const loginUser = async (req, res) => {
       res.status(401).json({ message: "Ops, credenciais inválidas!" });
     }
 
-    res.json({ message: "Login bem-sucedido!" });
+    res.json({
+      message: "Login bem-sucedido!",
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+    });
   } catch (error) {
     console.error("Erro ao tentar fazer login: ", error);
     res.status(500).json({ error: "Erro interno no servidor" });

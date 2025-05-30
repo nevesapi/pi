@@ -10,9 +10,9 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
   // console.log(nome.value);
 
-  const nomeValue = nome.value;
-  const emailValue = email.value;
-  const passwordValue = password.value;
+  const nomeValue = nome.value.trim();
+  const emailValue = email.value.trim();
+  const passwordValue = password.value.trim();
 
   try {
     const response = await fetch("http://localhost:3000/api/users/cadastro", {
@@ -26,7 +26,12 @@ form.addEventListener("submit", async (event) => {
     });
 
     const data = await response.json();
-    statusForm.textContent = data.message;
+
+    if (response.ok) {
+      statusForm.textContent = data.message;
+
+      sessionStorage.setItem("user", JSON.stringify(data.user));
+    }
   } catch (error) {
     statusForm.textContent = "Ops, erro ao cadastrar usuário. Tente novamente!";
     console.log(error);

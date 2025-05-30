@@ -7,8 +7,8 @@ const password = document.querySelector("#password");
 formLogin.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const emailValue = email.value;
-  const passwordValue = password.value;
+  const emailValue = email.value.trim();
+  const passwordValue = password.value.trim();
 
   try {
     const response = await fetch("http://localhost:3000/api/users/login", {
@@ -25,6 +25,8 @@ formLogin.addEventListener("submit", async (event) => {
     if (response.ok) {
       statusForm.textContent = data.message || "Login Realizado com successo!";
       statusForm.style.color = "green";
+
+      sessionStorage.setItem("user", JSON.stringify(data.user));
       window.location.href = "dashboard.html";
     } else {
       statusForm.textContent = data.message || "Erro ao fazer login!";

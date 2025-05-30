@@ -1,7 +1,11 @@
+import { autHeader } from "./authHeader.js";
 import { menuHamburguer } from "./menu.js";
 import { modal } from "./modal.js";
 import { shopCart } from "./shopCart.js";
 
-modal();
-shopCart();
-menuHamburguer();
+document.addEventListener("DOMContentLoaded", () => {
+  menuHamburguer();
+  shopCart();
+  modal();
+  autHeader();
+});

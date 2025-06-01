@@ -73,3 +73,28 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ error: "Erro interno no servidor" });
   }
 };
+
+export const getUserByEmail = async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const [result] = await pool.query("SELECT * FROM users WHERE email = ?", [
+      email,
+    ]);
+    if (result.length > 0) {
+      const user = result[0];
+      return res.json({
+        message: "Busca executada com exito",
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        },
+      });
+    } else {
+      return res.status(404).json({ message: "Ops! Falha ao buscar usuário!" });
+    }
+  } catch (error) {
+    return res.status(500).json({ error: "Erro interno no servidor" });
+  }
+};

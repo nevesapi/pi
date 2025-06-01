@@ -33,14 +33,6 @@ if (cart.length === 0) {
           <p>${item.quantity}x R$ ${formatPrice(
       item.price
     )} <span>@</span> R$ ${formatPrice(subtotal)}</p>
-        <div class="flex-ai-center">
-          <button class="btn remove flex-ai-jc-center" aria-label="Botão de remover">
-          <i class="fi fi-rr-minus flex-ai-jc-center"></i>
-        </button>
-        <button class="btn add flex-ai-jc-center" aria-label="Botão de adicionar">
-          <i class="fi fi-rr-add flex-ai-jc-center"></i>
-        </button>
-        </div>
     `;
     container.appendChild(itemEl);
   });

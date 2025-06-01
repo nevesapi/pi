@@ -1,5 +1,6 @@
-const form = document.querySelector("#form-register");
+import { API_BASE_URL } from "./apiConfig.js";
 
+const form = document.querySelector("#form-register");
 const nome = document.querySelector("#nome");
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
@@ -15,7 +16,7 @@ form.addEventListener("submit", async (event) => {
   const passwordValue = password.value.trim();
 
   try {
-    const response = await fetch("http://localhost:3000/api/users/cadastro", {
+    const response = await fetch(`${API_BASE_URL}/api/users/cadastro`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

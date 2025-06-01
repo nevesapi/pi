@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./apiConfig.js";
+
 const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
 const container = document.getElementById("checkout");
 const totalDisplay = document.getElementById("checkout-total");
@@ -75,7 +77,7 @@ form.addEventListener("submit", async (event) => {
 
   try {
     const response = await fetch(
-      `http://localhost:3000/api/users?email=${encodeURIComponent(email)}`
+      `${API_BASE_URL}/api/users?email=${encodeURIComponent(email)}`
     );
 
     const data = await response.json();

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "./apiConfig.js";
 const formLogin = document.querySelector("#form-login");
 const statusForm = document.querySelector("#my-form-status");
 
@@ -11,7 +12,7 @@ formLogin.addEventListener("submit", async (event) => {
   const passwordValue = password.value.trim();
 
   try {
-    const response = await fetch("http://localhost:3000/api/users/login", {
+    const response = await fetch(`${API_BASE_URL}/api/users/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

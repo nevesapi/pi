@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
       rel="stylesheet"
     />
 
@@ -26,11 +26,14 @@
 
   <body>
     <!-- Inicio do header -->
-    <header>
+    <header class="flex-ai-jc-center">
       <div class="limitador">
         <div class="header">
           <h1 class="titulo">
-            <a href="index.html" aria-label="Página inicial Cooffee"
+            <a
+              href="index.html"
+              aria-label="Página inicial Cooffee"
+              class="flex-ai-jc-center"
               ><span>Cooffee</span
               ><img src="assets/icons/logo_cooffee.svg" alt="Logotipo Cooffee"
             /></a>
@@ -38,28 +41,38 @@
           <nav role="navigation" aria-label="Menu principal">
             <button
               type="button"
-              class="btn-menu"
+              class="btn-menu flex-ai-jc-center"
               aria-label="Abrir menu da navegação"
               aria-expanded="false"
             >
-              <i class="fi fi-rr-menu-burger" id="icon-menu"></i>
+              <i
+                class="fi fi-rr-menu-burger flex-ai-jc-center"
+                id="icon-menu"
+              ></i>
             </button>
             <ul class="links-menu">
               <li>
-                <a href="/"><i class="fi fi-rr-home"></i>Home</a>
-              </li>
-
-              <li>
-                <a href="cardapio.html"
-                  ><i class="fi fi-rr-flower-tulip"></i>Cardápio</a
+                <a href="/" class="flex-ai-jc-center"
+                  ><i class="fi fi-rr-home flex-ai-jc-center"></i>Home</a
                 >
               </li>
 
               <li>
-                <a href="login.html"><i class="fi fi-rr-user"></i>Login </a>
+                <a href="cardapio.html" class="flex-ai-jc-center"
+                  ><i class="fi fi-rr-flower-tulip flex-ai-jc-center"></i
+                  >Cardápio</a
+                >
+              </li>
+
+              <li>
+                <a href="login.html" class="flex-ai-jc-center"
+                  ><i class="fi fi-rr-user flex-ai-jc-center"></i>Login
+                </a>
               </li>
             </ul>
-            <a href="#" class="cart"><i class="fi fi-rr-shopping-cart"></i></a>
+            <a href="#" class="cart"
+              ><i class="fi fi-rr-shopping-cart flex-ai-jc-center"></i
+            ></a>
           </nav>
         </div>
       </div>
@@ -70,7 +83,7 @@
     <main id="main-content">
       <div class="form-container">
         <div class="limitador">
-          <div class="form-align">
+          <div class="form-align flex-ai-jc-center">
             <div class="form-content-container">
               <div class="form-content">
                 <h2>Formulário Cooffee</h2>
@@ -84,9 +97,9 @@
                 </p>
               </div>
 
-              <form id="form-login" action="" method="post">
-                <div class="form">
-                  <div class="email">
+              <form id="form-login" class="flex-col" method="post">
+                <div class="form flex-col">
+                  <div class="email flex-col">
                     <input
                       required
                       type="email"
@@ -97,7 +110,7 @@
                     />
                   </div>
 
-                  <div class="password">
+                  <div class="password flex-col">
                     <input
                       required
                       type="password"
@@ -110,11 +123,12 @@
 
                   <button
                     id="my-form-button"
-                    class="btn-submit"
+                    class="btn-submit flex-ai-jc-center"
                     type="submit"
                     aria-label="Botão de login"
                   >
-                    Entrar <i class="fi fi-rr-paper-plane"></i>
+                    Entrar
+                    <i class="fi fi-rr-paper-plane flex-ai-jc-center"></i>
                   </button>
                   <span id="my-form-status"></span>
                 </div>
@@ -136,15 +150,15 @@
     <footer>
       <div class="limitador">
         <div class="footer">
-          <div class="info">
+          <div class="info flex-col">
             <div class="endereco">
               <div class="endereco-info">
                 <h2>Unidade Vila Mariana</h2>
                 <p>Rua não sei o lá, 123</p>
               </div>
-              <div class="horarios">
+              <div class="horarios flex-col">
                 <h2>Horários</h2>
-                <ul class="lista-horarios">
+                <ul class="lista-horarios flex-col">
                   <li>
                     <p>08:00 às 22:00</p>
                     <p><strong>Segunda a Sexta</strong></p>
@@ -166,25 +180,15 @@
               />
             </div>
 
-            <div class="contato">
+            <div class="contato flex-col">
               <div class="whatsapp-info">
                 <h2>WhatsApp</h2>
-                <p>
-                  <a
-                    href="tel:+5511981075141"
-                    aria-label="Enviar mensagem pelo WhatsApp para (11) 98107-5141"
-                    >(11) 98107-5141</a
-                  >
-                </p>
+                <p><a href="tel:+5511981075141">(11) 98107-5141</a></p>
               </div>
               <div class="email-info">
                 <h2>E-mail</h2>
                 <p>
-                  <a
-                    href="mailto:teste@teste.com"
-                    aria-label="Enviar mensagem por e-mail teste@teste.com"
-                    >teste@teste.com</a
-                  >
+                  <a href="mailto:teste@teste.com">teste@teste.com</a>
                 </p>
               </div>
             </div>
@@ -193,16 +197,19 @@
       </div>
     </footer>
 
-    <div id="cart-modal" class="modal hidden">
-      <div class="modal-content">
+    <div id="cart-modal" class="flex-ai-jc-center modal hidden">
+      <div class="modal-content flex-col">
         <div class="header-modal">
           <h2>Meu Carrinho</h2>
           <button id="close-modal">
-            <span>Fechar</span><i class="fi fi-rr-circle-xmark"></i>
+            <span>Fechar</span
+            ><i class="fi fi-rr-circle-xmark flex-ai-jc-center"></i>
           </button>
         </div>
         <div id="cart-items"></div>
-        <button id="checkout-btn">Finalizar Compra</button>
+        <button id="checkout-btn" class="flex-ai-jc-center">
+          Finalizar Compra
+        </button>
       </div>
     </div>
     <script type="module" src="js/main.js"></script>

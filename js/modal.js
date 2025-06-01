@@ -35,17 +35,23 @@ export function modal() {
     checkoutBtn.style.display = "flex";
 
     cart.forEach((item) => {
+      const itemPrice = formatPrice(item.price);
+      const subtotalPrice = formatPrice(item.price * item.quantity);
+
       const itemDiv = document.createElement("div");
       itemDiv.classList.add("cart-item");
       itemDiv.innerHTML = `
           <img src="${item.image}" alt="${item.name}" width="60" />
           <div>
             <h4>${item.name}</h4>
-            <p>Qtd.: ${item.quantity}</p>
-            <p>Total: R$ ${(item.price * item.quantity).toFixed(2)}</p>
+            <p>x${item.quantity} - R$ ${itemPrice} <span> @ </span> R$ ${subtotalPrice}</p>
           </div>
         `;
       cartItemsContainer.appendChild(itemDiv);
     });
+  }
+
+  function formatPrice(value) {
+    return value.toFixed(2).replace(".", ",");
   }
 }

@@ -7,6 +7,10 @@ const CATEGORY_LABELS = {
   salgado: "Salgados",
 };
 
+function formatPrice(product) {
+  return Number(product).toFixed(2).replace(".", ",");
+}
+
 function createProductCard(product) {
   return `
     <div class="card-produto" data-id="${product.id}">
@@ -14,12 +18,12 @@ function createProductCard(product) {
       <h3>${product.name}</h3>
       <span>${product.description}</span>
       <div class="button-container">
-        <button class="remove" aria-label="Botão de remover">
-          <i class="fi fi-rr-minus"></i>
+        <button class="remove flex-ai-jc-center" aria-label="Botão de remover">
+          <i class="fi fi-rr-minus flex-ai-jc-center"></i>
         </button>
-        <p class="price">R$${product.price}</p>
-        <button class="add" aria-label="Botão de adicionar">
-          <i class="fi fi-rr-add"></i>
+        <p class="price">R$${formatPrice(product.price)}</p>
+        <button class="add flex-ai-jc-center" aria-label="Botão de adicionar">
+          <i class="fi fi-rr-add flex-ai-jc-center"></i>
         </button>
       </div>
     </div>
@@ -32,9 +36,6 @@ function setupScrollButtons(container) {
 
   const btnPrev = containerSlider.querySelector(".slider-btn.prev");
   const btnNext = containerSlider.querySelector(".slider-btn.next");
-
-  // console.log(btnNext);
-  // console.log(btnPrev);
 
   if (btnPrev) {
     btnPrev.addEventListener("click", () => {

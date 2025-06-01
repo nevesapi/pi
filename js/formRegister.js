@@ -31,6 +31,7 @@ form.addEventListener("submit", async (event) => {
       statusForm.textContent = data.message;
 
       sessionStorage.setItem("user", JSON.stringify(data.user));
+      window.location.href = "dashboard.html";
     }
   } catch (error) {
     statusForm.textContent = "Ops, erro ao cadastrar usuário. Tente novamente!";

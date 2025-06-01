@@ -12,15 +12,18 @@ export function autHeader() {
 
     const userInfo = document.createElement("li");
     const userLogout = document.createElement("li");
-    userInfo.innerHTML = `<a href="dashboard.html" class="user-info">Olá, ${
+    userInfo.innerHTML = `<a href="dashboard.html" class="user-info flex-ai-jc-center">Olá, ${
       user.name.split(" ")[0]
-    }<i class="fi fi-rr-user-pen"></a>`;
-    userLogout.innerHTML = `<button id="logout-btn" type='button'"> <span>Sair</span> <i class="fi fi-rr-exit"></i></button>`;
+    }<i class="fi fi-rr-user-pen flex-ai-jc-center"></a>`;
+    userLogout.innerHTML = `
+      <button id="logout-btn" class="flex-ai-jc-center" type='button'"> <span>Sair</span> <i class="fi fi-rr-exit flex-ai-jc-center"></i></button>`;
     navLinks.appendChild(userInfo);
     navLinks.appendChild(userLogout);
 
     document.getElementById("logout-btn").addEventListener("click", () => {
       sessionStorage.removeItem("user");
+      sessionStorage.removeItem("userInfo");
+      sessionStorage.removeItem("cart");
       window.location.reload();
     });
   }

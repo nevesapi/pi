@@ -7,6 +7,7 @@ export function shopCart() {
   let cartItems = JSON.parse(sessionStorage.getItem("cart")) || [];
 
   updateCartCounter();
+  spanCount.classList = "flex-ai-jc-center";
 
   document.addEventListener("click", (event) => {
     const addBtn = event.target.closest("button.add");
@@ -37,6 +38,19 @@ export function shopCart() {
         existing.quantity += 1;
       } else {
         cartItems.push(product);
+      }
+
+      const icon = addBtn.querySelector("i");
+      if (icon) {
+        icon.classList.add("icon-feedback");
+
+        const originalClass = icon.className;
+        icon.className = "fi fi-rr-check";
+
+        setTimeout(() => {
+          icon.className = originalClass;
+          icon.classList.remove("icon-feedback");
+        }, 1000);
       }
     }
 

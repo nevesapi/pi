@@ -18,7 +18,7 @@ export function modal() {
   });
 
   checkoutBtn.addEventListener("click", () => {
-    window.location.href = "/checkout.html";
+    window.location.href = "checkout.html";
   });
 
   function showCartItems() {

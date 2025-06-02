@@ -186,7 +186,7 @@ function renderCepForm() {
     finalizeBtn.textContent = "Enviando pedido...";
 
     try {
-      const response = await fetch("http://localhost:3000/api/orders", {
+      const response = await fetch(`${API_BASE_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

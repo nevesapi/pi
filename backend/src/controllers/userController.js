@@ -44,6 +44,10 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).json({ message: "Preencha todos os campos" });
+  }
+
   try {
     const [users] = await pool.execute("SELECT * FROM users WHERE email = ?", [
       email,
@@ -76,6 +80,10 @@ export const loginUser = async (req, res) => {
 
 export const getUserByEmail = async (req, res) => {
   const { email } = req.query;
+
+  if (!email) {
+    return res.status(400).json({ message: "Email é obrigatório" });
+  }
 
   try {
     const [result] = await pool.query("SELECT * FROM users WHERE email = ?", [

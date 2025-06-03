@@ -13,11 +13,10 @@ export const createOrder = async (req, res) => {
   try {
     await conn.beginTransaction();
 
-    // inseindo pedido na tabela orders (no caso do created_at, o db se vira kkkkkkk)
     const [orderResult] = await conn.query(
       `INSERT INTO orders 
-    (user_id, email, total_price, cep, logradouro, bairro, localidade, uf) 
-   VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      (user_id, email, total_price, cep, logradouro, bairro, localidade, uf) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         user_id,
         email || null,
@@ -31,25 +30,31 @@ export const createOrder = async (req, res) => {
     );
 
     const orderId = orderResult.insertId;
-
     let totalPrice = 0;
 
-    // Aqui é pra nnserir os itens do pedido na tabela order_items e somar o total (só deus sabe o quanto eu bati lata aqui)
     for (const item of items) {
-      const { product_id, product_name, quantity, unit_price } = item;
+      const { product_id, quantity } = item;
 
-      const itemTotal = unit_price * quantity;
+      const [[product]] = await conn.query(
+        "SELECT name, price FROM products WHERE id = ?",
+        [product_id]
+      );
+
+      if (!product) {
+        throw new Error(`Falha ao buscar produto.`);
+      }
+
+      const itemTotal = product.price * quantity;
       totalPrice += itemTotal;
 
       await conn.query(
         `INSERT INTO order_items 
          (order_id, product_id, product_name, quantity, unit_price, total_price) 
          VALUES (?, ?, ?, ?, ?, ?)`,
-        [orderId, product_id, product_name, quantity, unit_price, itemTotal]
+        [orderId, product_id, product.name, quantity, product.price, itemTotal]
       );
     }
 
-    // total_price do pedido
     await conn.query("UPDATE orders SET total_price = ? WHERE id = ?", [
       totalPrice,
       orderId,
@@ -77,19 +82,18 @@ export const getOrdersByUser = async (req, res) => {
   try {
     const [orders] = await pool.query(
       `SELECT 
-          orders.id AS order_id,
-          orders.total_price AS order_total,
-          orders.created_at AS order_date,
-          order_items.product_name AS item_name,
-          order_items.quantity AS item_quantity,
-          order_items.unit_price AS item_price,
-          order_items.total_price AS item_total_price
-        FROM orders
-        INNER JOIN order_items 
-        ON orders.id = order_items.order_id
-        WHERE orders.user_id = ?
-        ORDER BY orders.created_at
-      `,
+        orders.id AS order_id,
+        orders.total_price AS order_total,
+        orders.created_at AS order_date,
+        order_items.product_name AS item_name,
+        order_items.quantity AS item_quantity,
+        order_items.unit_price AS item_price,
+        order_items.total_price AS item_total_price
+      FROM orders
+      INNER JOIN order_items 
+      ON orders.id = order_items.order_id
+      WHERE orders.user_id = ?
+      ORDER BY orders.created_at`,
       [userId]
     );
 

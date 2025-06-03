@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "./apiConfig.js";
+import { renderCart } from "./renderCart.js";
 
-const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
 const container = document.getElementById("checkout");
 const totalDisplay = document.getElementById("checkout-total");
 const form = document.getElementById("form-search");
@@ -14,31 +14,7 @@ function formatPrice(value) {
   return value.toFixed(2).replace(".", ",");
 }
 
-// carrinho
-if (cart.length === 0) {
-  container.innerHTML = "<p>Seu carrinho está vazio.</p>";
-  totalDisplay.textContent = "";
-} else {
-  let total = 0;
-  cart.forEach((item) => {
-    const subtotal = item.price * item.quantity;
-    total += subtotal;
-
-    const itemEl = document.createElement("div");
-    itemEl.classList.add("checkout-items");
-    itemEl.innerHTML = `
-        <img src="${item.image}" alt="${item.name}"/>
-        <div class='checkout-items-info'>
-          <h4>${item.name}</h4>
-          <p>${item.quantity}x R$ ${formatPrice(
-      item.price
-    )} <span>@</span> R$ ${formatPrice(subtotal)}</p>
-    `;
-    container.appendChild(itemEl);
-  });
-
-  totalDisplay.innerHTML = `<strong>Total: R$ ${formatPrice(total)}</strong>`;
-}
+renderCart(container, totalDisplay);
 
 if (userLogged && !userInfoData) {
   sessionStorage.setItem("userInfo", userLogged);
@@ -60,7 +36,6 @@ if (userInfoData) {
   renderCepForm();
 }
 
-// search user por e-mail
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -71,8 +46,8 @@ form.addEventListener("submit", async (event) => {
     const response = await fetch(
       `${API_BASE_URL}/api/users?email=${encodeURIComponent(email)}`
     );
-
     const data = await response.json();
+
     if (!response.ok || !data.user) {
       statusForm.textContent = "Falha ao buscar usuário. Tente novamente!";
       statusForm.style.color = "red";
@@ -111,13 +86,11 @@ function renderCepForm() {
   `;
   form.parentNode.insertBefore(cepForm, form.nextSibling);
 
-  // status do CEP (vou deoxar fora do form)
   const status = document.createElement("div");
   status.id = "cep-status";
   status.style.marginTop = "10px";
   cepForm.parentNode.insertBefore(status, cepForm.nextSibling);
 
-  // btn finaliza pedido
   const finalizeBtn = document.createElement("button");
   finalizeBtn.textContent = "Finalizar Pedido";
   finalizeBtn.disabled = true;
@@ -126,7 +99,6 @@ function renderCepForm() {
   finalizeBtn.style.marginTop = "20px";
   status.parentNode.insertBefore(finalizeBtn, status.nextSibling);
 
-  // to maluco já, aqui é o endereço salvo do sessionStorage
   if (addressData) {
     const addr = JSON.parse(addressData);
     status.innerHTML = `
@@ -188,9 +160,7 @@ function renderCepForm() {
     try {
       const response = await fetch(`${API_BASE_URL}/api/orders`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user_id: user.id,
           email: user.email,
@@ -204,9 +174,7 @@ function renderCepForm() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Erro ao enviar pedido.");
-      }
+      if (!response.ok) throw new Error("Erro ao enviar pedido.");
 
       sessionStorage.removeItem("cart");
       sessionStorage.removeItem("userInfo");

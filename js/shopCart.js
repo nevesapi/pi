@@ -1,3 +1,5 @@
+import { updateCartCounter } from "./cartCounter.js";
+
 export function shopCart() {
   const spanCount = document.createElement("span");
   const cart = document.querySelector(".cart i");
@@ -68,24 +70,6 @@ export function shopCart() {
     saveCart();
     updateCartCounter();
   });
-
-  function updateCartCounter() {
-    const totalQuantity = cartItems.reduce(
-      (acc, item) => acc + item.quantity,
-      0
-    );
-
-    if (totalQuantity > 0) {
-      spanCount.textContent = totalQuantity;
-      if (!cart.contains(spanCount)) {
-        cart.appendChild(spanCount);
-      }
-    } else {
-      if (cart.contains(spanCount)) {
-        cart.removeChild(spanCount);
-      }
-    }
-  }
 
   function saveCart() {
     sessionStorage.setItem("cart", JSON.stringify(cartItems));

@@ -19,7 +19,7 @@ function createProductCard(product) {
       <img src="${product.image}" alt="${product.name}" />
       <h3>${product.name}</h3>
       <span>${product.description}</span>
-      <div class="button-container">
+      <div class="button-container flex-aic-jc-sb">
         <button class="remove flex-ai-jc-center" aria-label="Botão de remover">
           <i class="fi fi-rr-minus flex-ai-jc-center"></i>
         </button>

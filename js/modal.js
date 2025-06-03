@@ -1,3 +1,6 @@
+import { updateCartCounter } from "./cartCounter.js";
+import { renderCart } from "./renderCart.js";
+
 export function modal() {
   const cartIcon = document.querySelector(".cart");
   const modal = document.getElementById("cart-modal");
@@ -21,6 +24,14 @@ export function modal() {
     window.location.href = "checkout.html";
   });
 
+  function safeRenderCartIfExists() {
+    const container = document.getElementById("checkout");
+    const totalDisplay = document.getElementById("checkout-total");
+    if (container && totalDisplay) {
+      renderCart(container, totalDisplay);
+    }
+  }
+
   function showCartItems() {
     const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
     cartItemsContainer.innerHTML = "";
@@ -34,19 +45,48 @@ export function modal() {
 
     checkoutBtn.style.display = "flex";
 
-    cart.forEach((item) => {
+    cart.forEach((item, index) => {
       const itemPrice = formatPrice(item.price);
       const subtotalPrice = formatPrice(item.price * item.quantity);
+      const itemRenderQuantity =
+        item.quantity > 1 ? "<span> @ </span> R$" + subtotalPrice : "";
 
       const itemDiv = document.createElement("div");
-      itemDiv.classList.add("cart-item");
+      itemDiv.classList.add("cart-item", "flex-aic-jc-sb");
       itemDiv.innerHTML = `
           <img src="${item.image}" alt="${item.name}" width="60" />
           <div>
             <h4>${item.name}</h4>
-            <p>x${item.quantity} - R$ ${itemPrice} <span> @ </span> R$ ${subtotalPrice}</p>
+            <p>x${item.quantity} - R$ ${itemPrice} ${itemRenderQuantity}</p>
+            <div class="checkout-button flex-aic-jc-fe">
+              <button type="button" class="btn remove flex-ai-jc-center"> - </button>
+              <button type="button" class="btn add flex-ai-jc-center"> + </button>
+            </div>
           </div>
         `;
+
+      const addBtn = itemDiv.querySelector(".add");
+      const removeBtn = itemDiv.querySelector(".remove");
+
+      addBtn.addEventListener("click", () => {
+        cart[index].quantity += 1;
+        sessionStorage.setItem("cart", JSON.stringify(cart));
+        showCartItems();
+        updateCartCounter();
+        safeRenderCartIfExists();
+      });
+
+      removeBtn.addEventListener("click", () => {
+        if (cart[index].quantity > 1) {
+          cart[index].quantity -= 1;
+        } else {
+          cart.splice(index, 1);
+        }
+        sessionStorage.setItem("cart", JSON.stringify(cart));
+        showCartItems();
+        updateCartCounter();
+        safeRenderCartIfExists();
+      });
       cartItemsContainer.appendChild(itemDiv);
     });
   }

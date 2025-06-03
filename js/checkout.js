@@ -10,10 +10,6 @@ const userInfoData = sessionStorage.getItem("userInfo");
 const userLogged = sessionStorage.getItem("user");
 const addressData = sessionStorage.getItem("address");
 
-function formatPrice(value) {
-  return value.toFixed(2).replace(".", ",");
-}
-
 renderCart(container, totalDisplay);
 
 if (userLogged && !userInfoData) {
@@ -40,7 +36,7 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const email = document.getElementById("email").value.trim();
-  if (!email) return;
+  if (!email) return ((statusForm.textContent = "Preencha todos os campos") && (statusForm.style.color = "red"));
 
   try {
     const response = await fetch(

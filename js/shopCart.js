@@ -1,12 +1,11 @@
 import { updateCartCounter } from "./cartCounter.js";
+import { getCart, saveCart } from "./utils/cartUtils.js";
 
 export function shopCart() {
   const spanCount = document.createElement("span");
   const cart = document.querySelector(".cart i");
 
   if (!cart) return;
-
-  let cartItems = JSON.parse(sessionStorage.getItem("cart")) || [];
 
   updateCartCounter();
   spanCount.classList = "flex-ai-jc-center";
@@ -19,6 +18,8 @@ export function shopCart() {
 
     const card = (addBtn || removeBtn).closest(".card-produto");
     if (!card) return;
+
+    let cartItems = getCart();
 
     const product = {
       id: card.dataset.id,
@@ -67,11 +68,7 @@ export function shopCart() {
       }
     }
 
-    saveCart();
+    saveCart(cartItems);
     updateCartCounter();
   });
-
-  function saveCart() {
-    sessionStorage.setItem("cart", JSON.stringify(cartItems));
-  }
 }

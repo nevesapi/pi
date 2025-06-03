@@ -1,7 +1,8 @@
 import { updateCartCounter } from "./cartCounter.js";
+import { getCart, saveCart } from "./utils/cartUtils.js";
 
 export function renderCart(container, totalDisplay) {
-  let cartItems = JSON.parse(sessionStorage.getItem("cart")) || [];
+  let cartItems = getCart() || [];
   container.innerHTML = "";
 
   if (cartItems.length === 0) {
@@ -14,7 +15,10 @@ export function renderCart(container, totalDisplay) {
 
   cartItems.forEach((item, index) => {
     const subtotal = item.price * item.quantity;
-    const itemRenderQuantity = item.quantity > 1 ? "<span> @ </span> R$" + subtotal.toFixed(2).replace(".", ",") : "";
+    const itemRenderQuantity =
+      item.quantity > 1
+        ? "<span> @ </span> R$" + subtotal.toFixed(2).replace(".", ",")
+        : "";
     total += subtotal;
 
     const itemEl = document.createElement("div");
@@ -23,7 +27,9 @@ export function renderCart(container, totalDisplay) {
       <img src="${item.image}" alt="${item.name}"/>
       <div class='checkout-items-info'>
         <h4>${item.name}</h4>
-        <p>${item.quantity}x R$ ${item.price.toFixed(2).replace(".", ",")} ${itemRenderQuantity}</p>
+        <p>${item.quantity}x R$ ${item.price
+      .toFixed(2)
+      .replace(".", ",")} ${itemRenderQuantity}</p>
         <div class="checkout-button flex-ai-center">
           <button type="button" class="btn remove flex-ai-jc-center"> - </button>
           <button type="button" class="btn add flex-ai-jc-center"> + </button>
@@ -36,7 +42,7 @@ export function renderCart(container, totalDisplay) {
 
     addBtn.addEventListener("click", () => {
       cartItems[index].quantity += 1;
-      sessionStorage.setItem("cart", JSON.stringify(cartItems));
+      saveCart(cartItems);
       renderCart(container, totalDisplay);
       updateCartCounter();
     });
@@ -47,7 +53,7 @@ export function renderCart(container, totalDisplay) {
       } else {
         cartItems.splice(index, 1);
       }
-      sessionStorage.setItem("cart", JSON.stringify(cartItems));
+      saveCart(cartItems);
       renderCart(container, totalDisplay);
       updateCartCounter();
     });
@@ -55,5 +61,7 @@ export function renderCart(container, totalDisplay) {
     container.appendChild(itemEl);
   });
 
-  totalDisplay.innerHTML = `<strong>Total: R$ ${total.toFixed(2).replace(".", ",")}</strong>`;
+  totalDisplay.innerHTML = `<strong>Total: R$ ${total
+    .toFixed(2)
+    .replace(".", ",")}</strong>`;
 }

@@ -1,4 +1,5 @@
 import { updateCartCounter } from "./cartCounter.js";
+import { getCart, saveCart } from "./utils/cartUtils.js";
 import { renderCart } from "./renderCart.js";
 
 export function modal() {
@@ -33,7 +34,7 @@ export function modal() {
   }
 
   function showCartItems() {
-    const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+    const cart = getCart() || [];
     cartItemsContainer.innerHTML = "";
 
     if (cart.length === 0) {
@@ -70,7 +71,7 @@ export function modal() {
 
       addBtn.addEventListener("click", () => {
         cart[index].quantity += 1;
-        sessionStorage.setItem("cart", JSON.stringify(cart));
+        saveCart(cart);
         showCartItems();
         updateCartCounter();
         safeRenderCartIfExists();
@@ -82,7 +83,7 @@ export function modal() {
         } else {
           cart.splice(index, 1);
         }
-        sessionStorage.setItem("cart", JSON.stringify(cart));
+        saveCart(cart);
         showCartItems();
         updateCartCounter();
         safeRenderCartIfExists();

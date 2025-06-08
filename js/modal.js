@@ -50,7 +50,7 @@ export function modal() {
       const itemPrice = formatPrice(item.price);
       const subtotalPrice = formatPrice(item.price * item.quantity);
       const itemRenderQuantity =
-        item.quantity > 1 ? "<span> @ </span> R$" + subtotalPrice : "";
+        item.quantity > 1 ? "<span> @ </span> R$ " + subtotalPrice : "";
 
       const itemDiv = document.createElement("div");
       itemDiv.classList.add("cart-item", "flex-aic-jc-sb");

@@ -1,18 +1,20 @@
 const btnHidePassword = document.querySelector(".btn-hide-password");
 const inputPassword = document.querySelector(".password input");
-const btnIcon = document.querySelector(".btn-hide-password i");
+const btnIcon = btnHidePassword.querySelector("i");
+
+btnHidePassword.setAttribute("aria-pressed", "false");
 
 btnHidePassword.addEventListener("click", () => {
-  let inputPasswordType = inputPassword.getAttribute("type");
+  const isPassword = inputPassword.getAttribute("type") === "password";
+
+  inputPassword.setAttribute("type", isPassword ? "text" : "password");
   inputPassword.focus();
 
-  inputPassword.setAttribute(
-    "type",
-    inputPasswordType === "password" ? "text" : "password"
+  btnIcon.classList.replace(
+    isPassword ? "fi-rr-eye" : "fi-rr-eye-crossed",
+    isPassword ? "fi-rr-eye-crossed" : "fi-rr-eye"
   );
 
-  btnIcon.classList.replace(
-    inputPasswordType === "password" ? "fi-rr-eye" : "fi-rr-eye-crossed",
-    inputPasswordType === "password" ? "fi-rr-eye-crossed" : "fi-rr-eye"
-  );
+  btnHidePassword.setAttribute("aria-pressed", String(isPassword));
+  btnHidePassword.setAttribute("aria-label", isPassword ? "Ocultar senha" : "Mostrar senha");
 });

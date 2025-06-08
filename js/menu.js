@@ -7,28 +7,35 @@ export function menuHamburguer() {
     btnMenuIcon.classList.replace("fi-rr-cross", "fi-rr-menu-burger");
     btnMenu.setAttribute("aria-expanded", "false");
     btnMenu.setAttribute("aria-label", "Abrir menu da navegação");
+    menu.classList.remove("ativo");
+    menu.hidden = true;
   }
 
-  btnMenu.addEventListener("click", () => {
-    menu.classList.toggle("ativo");
+  function openMenu() {
     btnMenuIcon.classList.replace("fi-rr-menu-burger", "fi-rr-cross");
     btnMenu.setAttribute("aria-expanded", "true");
     btnMenu.setAttribute("aria-label", "Fechar menu da navegação");
+    menu.classList.add("ativo");
+    menu.hidden = false;
+  }
 
-    if (!menu.classList.contains("ativo")) {
+  menu.hidden = true;
+
+  btnMenu.addEventListener("click", () => {
+    const isActive = menu.classList.contains("ativo");
+
+    if (isActive) {
       closeMenu();
-      return;
+    } else {
+      openMenu();
     }
   });
 
   window.addEventListener("resize", () => {
     const windowWidth = window.innerWidth;
-    // console.log(windowWidth);
-
     if (windowWidth > 768) {
-      menu.classList.remove("ativo");
       closeMenu();
-      return;
+      menu.hidden = false;
     }
   });
 }

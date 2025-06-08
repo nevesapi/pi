@@ -1,4 +1,6 @@
 import { API_BASE_URL } from "./apiConfig.js";
+import { setFormStatus } from "./utils/global.js";
+
 const formLogin = document.querySelector("#form-login");
 const statusForm = document.querySelector("#my-form-status");
 
@@ -10,6 +12,8 @@ formLogin.addEventListener("submit", async (event) => {
 
   const emailValue = email.value.trim();
   const passwordValue = password.value.trim();
+
+  if (!emailValue || !passwordValue) return setFormStatus(statusForm, "Preencha todos os campos!", "white");
 
   try {
     const response = await fetch(`${API_BASE_URL}/api/users/login`, {
@@ -23,19 +27,13 @@ formLogin.addEventListener("submit", async (event) => {
 
     const data = await response.json();
 
-    if (response.ok) {
-      statusForm.textContent = data.message || "Login Realizado com successo!";
-      statusForm.style.color = "green";
-
+    if (!response.ok) return setFormStatus(statusForm, data.message, "white");
+      
+      setFormStatus(statusForm, data.message, "white");
       sessionStorage.setItem("user", JSON.stringify(data.user));
       window.location.href = "dashboard.html";
-    } else {
-      statusForm.textContent = data.message || "Erro ao fazer login!";
-      statusForm.style.color = "red";
-    }
   } catch (error) {
     console.log(error);
-    statusForm.textContent = "Ops, falha ao fazer login. Tente novamente";
-    statusForm.style.color = "red";
+    setFormStatus(statusForm, "Ops, falha ao fazer login. Tente novamente", "white");
   }
 });

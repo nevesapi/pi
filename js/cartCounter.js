@@ -1,4 +1,4 @@
-import { getCart, saveCart } from "./utils/cartUtils.js";
+import { getCart } from "./utils/cartUtils.js";
 
 export function updateCartCounter() {
   const spanCount =
@@ -6,7 +6,7 @@ export function updateCartCounter() {
   const cartIcon = document.querySelector(".cart i");
   if (!cartIcon) return;
 
-  const cartItems = getCart() || [];
+  const cartItems = getCart();
   const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   spanCount.classList = "flex-ai-jc-center";

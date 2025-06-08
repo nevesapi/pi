@@ -1,17 +1,8 @@
 import { API_BASE_URL } from "./apiConfig.js";
+import { formatPrice } from "./utils/global.js";
 
 const SCROLL_AMOUNT = 355;
 const page = window.location.pathname;
-
-const CATEGORY_LABELS = {
-  bebida: "Bebidas",
-  doce: "Doces",
-  salgado: "Salgados",
-};
-
-function formatPrice(product) {
-  return Number(product).toFixed(2).replace(".", ",");
-}
 
 function createProductCard(product) {
   return `

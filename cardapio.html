@@ -19,14 +19,14 @@
     <link
       rel="shortcut icon"
       href="assets/icons/logo_cooffee.svg"
-      type="image/svg"
+      type="image/svg+xml"
     />
     <link rel="stylesheet" href="global.css" />
   </head>
 
   <body>
-    <!-- Inicio do header -->
-    <header class="flex-ai-jc-center">
+    <!-- Header principal -->
+    <header class="flex-ai-jc-center" role="banner">
       <div class="limitador">
         <div class="header flex-aic-jc-sb">
           <h1 class="titulo">
@@ -34,50 +34,65 @@
               href="index.html"
               aria-label="Página inicial Cooffee"
               class="flex-ai-jc-center"
-              ><span>Cooffee</span
-              ><img src="assets/icons/logo_cooffee.svg" alt="Logotipo Cooffee"
-            /></a>
+            >
+              <span>Cooffee</span>
+              <img src="assets/icons/logo_cooffee.svg" alt="Logotipo Cooffee" />
+            </a>
           </h1>
-          <nav role="navigation" aria-label="Menu principal">
+
+          <nav aria-label="Menu principal">
             <button
               type="button"
               class="btn-menu flex-ai-jc-center"
               aria-label="Abrir menu da navegação"
               aria-expanded="false"
+              aria-controls="menu-principal"
+              id="btn-menu"
             >
               <i
                 class="fi fi-rr-menu-burger flex-ai-jc-center"
                 id="icon-menu"
               ></i>
             </button>
-            <ul class="links-menu">
+            <ul class="links-menu" id="menu-principal" hidden>
               <li>
-                <a href="index.html" class="flex-ai-jc-center"
-                  ><i class="fi fi-rr-home flex-ai-jc-center"></i>Home</a
-                >
+                <a href="index.html" class="flex-ai-jc-center">
+                  <i
+                    class="fi fi-rr-home flex-ai-jc-center"
+                    aria-hidden="true"
+                  ></i>
+                  Home
+                </a>
               </li>
-
               <li>
-                <a href="cardapio.html" class="flex-ai-jc-center"
-                  ><i class="fi fi-rr-flower-tulip flex-ai-jc-center"></i
-                  >Cardápio</a
-                >
+                <a href="cardapio.html" class="flex-ai-jc-center">
+                  <i
+                    class="fi fi-rr-flower-tulip flex-ai-jc-center"
+                    aria-hidden="true"
+                  ></i>
+                  Cardápio
+                </a>
               </li>
-
               <li>
-                <a href="login.html" class="flex-ai-jc-center"
-                  ><i class="fi fi-rr-user flex-ai-jc-center"></i>Login
+                <a href="login.html" class="flex-ai-jc-center">
+                  <i
+                    class="fi fi-rr-user flex-ai-jc-center"
+                    aria-hidden="true"
+                  ></i>
+                  Login
                 </a>
               </li>
             </ul>
-            <a href="#" class="cart"
-              ><i class="fi fi-rr-shopping-cart flex-ai-jc-center"></i
-            ></a>
+            <a href="#" class="cart" aria-label="Ver carrinho de compras">
+              <i
+                class="fi fi-rr-shopping-cart flex-ai-jc-center"
+                aria-hidden="true"
+              ></i>
+            </a>
           </nav>
         </div>
       </div>
     </header>
-    <!-- Final da header -->
 
     <!-- Começo conteúdo principal (main) -->
     <main id="main-content">
@@ -87,7 +102,7 @@
           <h2>Cardápio</h2>
           <div class="cardapio-page-container flex-col">
             <section class="container-card-slider">
-              <h3></h3>
+              <h3>Carregando...</h3>
               <button
                 type="button"
                 class="slider-btn prev"
@@ -106,7 +121,7 @@
             </section>
 
             <section class="container-card-slider">
-              <h3></h3>
+              <h3>Carregando...</h3>
               <button
                 type="button"
                 class="slider-btn prev"
@@ -125,7 +140,7 @@
             </section>
 
             <section class="container-card-slider">
-              <h3></h3>
+              <h3>Carregando...</h3>
               <button
                 type="button"
                 class="slider-btn prev"
@@ -147,10 +162,10 @@
       </div>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
       <div class="limitador">
         <div class="footer">
-          <div class="info flex-col">
+          <address class="info flex-col">
             <div class="endereco">
               <div class="endereco-info">
                 <h2>Unidade Vila Mariana</h2>
@@ -163,7 +178,6 @@
                     <p>08:00 às 22:00</p>
                     <p><strong>Segunda a Sexta</strong></p>
                   </li>
-
                   <li>
                     <p>10:00 às 22:00</p>
                     <p><strong>Sábados</strong></p>
@@ -192,26 +206,43 @@
                 </p>
               </div>
             </div>
-          </div>
+          </address>
         </div>
       </div>
     </footer>
 
-    <div id="cart-modal" class="flex-ai-jc-center modal hidden">
+    <div
+      id="cart-modal"
+      class="flex-ai-jc-center modal hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cart-title"
+      aria-describedby="cart-items"
+      tabindex="-1"
+    >
       <div class="modal-content flex-col">
-        <div class="header-modal flex-aic-jc-sb">
-          <h2>Meu Carrinho</h2>
-          <button id="close-modal">
-            <span>Fechar</span
-            ><i class="fi fi-rr-circle-xmark flex-ai-jc-center"></i>
+        <header class="header-modal flex-aic-jc-sb">
+          <h2 id="cart-title">Meu Carrinho</h2>
+          <button id="close-modal" aria-label="Fechar modal do carrinho">
+            <span class="sr-only">Fechar</span>
+            <i
+              class="fi fi-rr-circle-xmark flex-ai-jc-center"
+              aria-hidden="true"
+            ></i>
           </button>
-        </div>
-        <div id="cart-items"></div>
-        <button id="checkout-btn" class="flex-ai-jc-center">
+        </header>
+        <section
+          id="cart-items"
+          tabindex="0"
+          aria-live="polite"
+          aria-atomic="true"
+        ></section>
+        <button id="checkout-btn" class="flex-ai-jc-center" type="button">
           Finalizar Compra
         </button>
       </div>
     </div>
+
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/carrossel.js"></script>
   </body>

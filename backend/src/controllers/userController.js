@@ -54,18 +54,22 @@ export const loginUser = async (req, res) => {
     ]);
 
     if (users.length === 0) {
-      res.status(401).json({ message: "Ops, credenciais inválidas!" });
+      res
+        .status(401)
+        .json({ message: "Ops, falha ao fazer login. Tente novamente" });
     }
 
     const user = users[0];
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      res.status(401).json({ message: "Ops, credenciais inválidas!" });
+      res
+        .status(401)
+        .json({ message: "Ops, falha ao fazer login. Tente novamente" });
     }
 
     res.json({
-      message: "Login bem-sucedido!",
+      message: "Login realizado com sucesso!",
       user: {
         id: user.id,
         name: user.name,
@@ -104,5 +108,62 @@ export const getUserByEmail = async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({ error: "Erro interno no servidor" });
+  }
+};
+
+export const updateUser = async (req, res) => {
+  const { id } = req.params;
+  const { name, email } = req.body;
+
+  if (!name && !email) {
+    return res.status(400).json({ message: "Dados atualizados com sucesso!" });
+  }
+
+  try {
+    const [existingUser] = await pool.query(
+      "SELECT * FROM users WHERE id = ?",
+      [id]
+    );
+
+    if (existingUser.length === 0) {
+      return res.status(404).json({ message: "Usuário não encontrado" });
+    }
+
+    if (email) {
+      const [emailExists] = await pool.query(
+        "SELECT * FROM users WHERE email = ? AND id !== ?",
+        [email, id]
+      );
+
+      if (emailExists.length > 0) {
+        return res
+          .status(409)
+          .json({ message: "Ops, falha ao atualizar dados! Tente novamente!" });
+      }
+    }
+
+    const fields = [];
+    const values = [];
+
+    if (name) {
+      fields.push("name = ?");
+      values.push(name);
+    }
+
+    if (email) {
+      fields.push("email = ?");
+      values.push(email);
+    }
+
+    values.push(id);
+
+    const updateQuery = `UPDATE users SET ${fields.join(", ")} WHERE id = ?`;
+
+    await pool.query(updateQuery, values);
+
+    return res.status(200).json({ message: "Dados atualizados com sucesso." });
+  } catch (error) {
+    console.error("Falha ao atualizar usuário:", error);
+    return res.status(500).json({ message: "Erro no servidor." });
   }
 };

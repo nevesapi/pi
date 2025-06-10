@@ -6,7 +6,7 @@ const page = window.location.pathname;
 
 function createProductCard(product) {
   return `
-    <div class="card-produto" data-id="${product.id}">
+    <div class="card-produto flex-col" data-id="${product.id}">
       <img src="${product.image}" alt="${product.name}" />
       <h3>${product.name}</h3>
       <span>${product.description}</span>
